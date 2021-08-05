@@ -1,0 +1,24 @@
+create table if not exists genres (
+	id serial primary key, 
+	genres_name varchar(40) not null unique
+);
+
+create table if not exists singer (
+	id serial primary key, 
+	alias varchar(40) not null unique,
+	genres_id integer references genres(id) not null
+); 
+
+create table if not exists albums (
+	id serial primary key, 
+	alb_name varchar(40) not null,
+	release_data integer,
+	singer_id integer references singer(id) not null
+);
+
+create table if not exists songs (
+	id serial primary key, 
+	songs_name varchar(40) not null,
+	duration integer,
+	albums_id integer references albums(id) not null
+);
